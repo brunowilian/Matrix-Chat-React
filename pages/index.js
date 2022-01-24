@@ -38,7 +38,7 @@ function Titulo(props) {
         <Tag>{props.children}</Tag>
         <style jsx>{`
               ${Tag} {
-                  color: ${appConfig.theme.colors.neutrals['400']};
+                  color: ${appConfig.theme.colors.neutrals['500']};
                   font-size: 24px;
                   font-weight: 600;
               }
@@ -94,7 +94,7 @@ function Titulo(props) {
               width: '100%', maxWidth: '700px',
               borderRadius: '5px', padding: '32px', margin: '16px',
               boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-              backgroundColor: appConfig.theme.colors.neutrals[700],
+              backgroundColor: appConfig.theme.colors.neutrals[999],
             }}
           >
             {/* Formulário */}
@@ -106,16 +106,18 @@ function Titulo(props) {
               }}
             >
               <Titulo tag="h2">Seja Bem Vindo!</Titulo>
-              
+              <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
+                
+              </Text>
   
               <TextField
                 fullWidth
                 textFieldColors={{
                   neutral: {
-                    textColor: appConfig.theme.colors.neutrals[200],
-                    mainColor: appConfig.theme.colors.neutrals[900],
+                    textColor: appConfig.theme.colors.neutrals[100],
+                    mainColor: appConfig.theme.colors.neutrals[500],
                     mainColorHighlight: appConfig.theme.colors.primary[500],
-                    backgroundColor: appConfig.theme.colors.neutrals[800],
+                    backgroundColor: appConfig.theme.colors.neutrals[600],
                   },
                 }}
               />
@@ -126,8 +128,8 @@ function Titulo(props) {
                 buttonColors={{
                   contrastColor: appConfig.theme.colors.neutrals["000"],
                   mainColor: appConfig.theme.colors.primary[500],
-                  mainColorLight: appConfig.theme.colors.primary[400],
-                  mainColorStrong: appConfig.theme.colors.primary[600],
+                  mainColorLight: appConfig.theme.colors.primary[600],
+                  mainColorStrong: appConfig.theme.colors.primary[100],
                 }}
               />
             </Box>
@@ -142,9 +144,9 @@ function Titulo(props) {
                 alignItems: 'center',
                 maxWidth: '200px',
                 padding: '16px',
-                backgroundColor: appConfig.theme.colors.neutrals[800],
+                backgroundColor: appConfig.theme.colors.neutrals[999],
                 border: '1px solid',
-                borderColor: appConfig.theme.colors.neutrals[999],
+                borderColor: appConfig.theme.colors.neutrals[500],
                 borderRadius: '10px',
                 flex: 1,
                 minHeight: '240px',
@@ -160,7 +162,7 @@ function Titulo(props) {
               <Text
                 variant="body4"
                 styleSheet={{
-                  color: appConfig.theme.colors.neutrals[200],
+                  color: appConfig.theme.colors.neutrals[500],
                   backgroundColor: appConfig.theme.colors.neutrals[900],
                   padding: '3px 10px',
                   borderRadius: '1000px'
