@@ -106,9 +106,7 @@ function Titulo(props) {
               }}
             >
               <Titulo tag="h2">Seja Bem Vindo!</Titulo>
-              <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
-                {appConfig.name}
-              </Text>
+              
   
               <TextField
                 fullWidth
