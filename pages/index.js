@@ -24,7 +24,7 @@ function Titulo(props) {
 
   export default function PaginaInicial() {
     //const username = 'brunowilian';
-    const [username, setUsername] = React.useState('brunowilian');
+    const [username, setUsername] = React.useState('');
     const roteamento = useRouter();
    
     
@@ -35,8 +35,11 @@ function Titulo(props) {
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             backgroundColor: appConfig.theme.colors.primary[500],
-            backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
-            backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
+            backgroundImage: 'url(https://images8.alphacoders.com/103/thumb-1920-1034547.jpg)',
+            backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',  
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center',
+            
           }}
         >
           <Box
@@ -73,6 +76,7 @@ function Titulo(props) {
               </Text>
   
              <TextField
+             placeholder="Name do GitHub" 
              value={username}
              onChange={function (event){
                // Onde ta o valor?
