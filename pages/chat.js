@@ -2,33 +2,17 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
 
-
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
-    /*
-    // Usuário
-    - Usuário digita no campo textarea
-    - Aperta enter para enviar
-    - Tem que adicionar o texto na listagem
-    
-    // Dev
-    - [X] Campo criado
-    - [X] Vamos usar o onChange usa o useState (ter if pra caso seja enter pra limpar a variavel)
-    - [X] Lista de mensagens 
-    */
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length + 1,
-            de: 'brunowilian',
+            id: listaDeMensagens.length,
+            remetente: 'brunowilian',
             texto: novaMensagem,
-        };
-
-        setListaDeMensagens([
-            mensagem,
-            ...listaDeMensagens,
-        ]);
+        }
+        setListaDeMensagens([mensagem, ...listaDeMensagens]);
         setMensagem('');
     }
 
@@ -37,7 +21,7 @@ export default function ChatPage() {
             styleSheet={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: appConfig.theme.colors.primary[500],
-                backgroundImage: `url(https://i.pinimg.com/originals/3f/7a/4b/3f7a4bccc95e816224b0c8961aacbbbd.gif)`,
+                backgroundImage: `url(https://images8.alphacoders.com/103/thumb-1920-1034547.jpg)`,
                 backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
                 color: appConfig.theme.colors.neutrals['000']
             }}
@@ -49,7 +33,8 @@ export default function ChatPage() {
                     flex: 1,
                     boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
                     borderRadius: '5px',
-                    backgroundColor: appConfig.theme.colors.neutrals[999],
+                    backgroundColor: appConfig.theme.colors.neutrals[999
+                    ],
                     height: '100%',
                     maxWidth: '95%',
                     maxHeight: '95vh',
@@ -63,38 +48,39 @@ export default function ChatPage() {
                         display: 'flex',
                         flex: 1,
                         height: '80%',
-                        backgroundColor: appConfig.theme.colors.neutrals[990],
+                        backgroundColor: appConfig.theme.colors.neutrals[999],
                         flexDirection: 'column',
                         borderRadius: '5px',
                         padding: '16px',
                     }}
                 >
-                    <MessageList mensagens={listaDeMensagens} />
+
+                    {/* <MessageList mensagens={[]} /> */}
+                    <MessageList mensagens = {listaDeMensagens} setMensagens={setListaDeMensagens} />
                     {/* {listaDeMensagens.map((mensagemAtual) => {
                         return (
                             <li key={mensagemAtual.id}>
-                                {mensagemAtual.de}: {mensagemAtual.texto}
+                                {mensagemAtual.remetente} : {mensagemAtual.texto}
                             </li>
                         )
                     })} */}
+
                     <Box
                         as="form"
                         styleSheet={{
                             display: 'flex',
                             alignItems: 'center',
                         }}
-
                     >
-                        
                         <TextField
                             value={mensagem}
-                            onChange={(event) => {
-                                const valor = event.target.value;
+                            onChange={(e) => {
+                                const valor = e.target.value;
                                 setMensagem(valor);
                             }}
-                            onKeyPress={(event) => {
-                                if (event.key === 'Enter') {
-                                    event.preventDefault();
+                            onKeyUp={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
                                     handleNovaMensagem(mensagem);
                                 }
                             }}
@@ -111,13 +97,15 @@ export default function ChatPage() {
                                 color: appConfig.theme.colors.neutrals[200],
                             }}
                         />
-                        <Button
-                        label='Enviar'
-                        // criar uma funtion  no onClick 
-                        onClick={(event) =>{
-                            event.preventDefault();
-                            handleNovaMensagem(mensagem);
-                        }}
+                        <Button 
+                            type='submit'
+                            label='Enviar'
+                            variant='tertiary'
+                            colorVariant='neutral'
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleNovaMensagem(mensagem);
+                            }}
                         />
                     </Box>
                 </Box>
@@ -145,12 +133,18 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log(props);
+    function Remover(mensagem) {
+        const novaListaDeMensagens = props.mensagens.filter((mensagemRemover) =>{
+            return mensagem.id !== mensagemRemover.id
+        })
+        props.setMensagens(novaListaDeMensagens)
+    }
+
     return (
         <Box
             tag="ul"
             styleSheet={{
-                overflow: 'scroll',
+                overflow: 'auto',
                 display: 'flex',
                 flexDirection: 'column-reverse',
                 flex: 1,
@@ -174,6 +168,7 @@ function MessageList(props) {
                     >
                         <Box
                             styleSheet={{
+                                display: 'flex',
                                 marginBottom: '8px',
                             }}
                         >
@@ -185,10 +180,10 @@ function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/brunowilian.png`}
+                                src={`https://github.com/${mensagem.remetente}.png`}
                             />
                             <Text tag="strong">
-                                {mensagem.de}
+                                {mensagem.remetente}
                             </Text>
                             <Text
                                 styleSheet={{
@@ -200,10 +195,27 @@ function MessageList(props) {
                             >
                                 {(new Date().toLocaleDateString())}
                             </Text>
+                                <Button 
+                                    label='Excluir'
+                                    type='button'
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        Remover(mensagem);
+                                    }}
+                                    styleSheet={{
+                                        height: '15px',
+                                        width: '48px',
+                                        marginLeft: '15px',
+                                        
+                                        hover: {
+                                            backgroundColor: appConfig.theme.colors.neutrals[999],
+                                        }
+                                    }}
+                                />
                         </Box>
                         {mensagem.texto}
                     </Text>
-                );
+                )
             })}
         </Box>
     )
