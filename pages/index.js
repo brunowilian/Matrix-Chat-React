@@ -24,7 +24,7 @@ function Titulo(props) {
 
   export default function PaginaInicial() {
     //const username = 'brunowilian';
-    const [username, setUsername] = React.useState('');
+    const [username, setUsername] = React.useState('brunowilian');
     const roteamento = useRouter();
    
     
@@ -72,11 +72,12 @@ function Titulo(props) {
             >
               <Titulo tag="h2">Seja Bem Vindo!</Titulo>
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
-                
+              {appConfig.name}
               </Text>
   
              <TextField
-             placeholder="Name do GitHub" 
+             // placeholder especifica uma dica curta que descreve o valor esperado 
+             placeholder="UserName do GitHub" 
              value={username}
              onChange={function (event){
                // Onde ta o valor?
