@@ -111,7 +111,14 @@ export default function ChatPage() {
                                 color: appConfig.theme.colors.neutrals[200],
                             }}
                         />
-                       
+                        <Button
+                        label='Enviar'
+                        // criar uma funtion  no onClick 
+                        onClick={(event) =>{
+                            event.preventDefault();
+                            handleNovaMensagem(mensagem);
+                        }}
+                        />
                     </Box>
                 </Box>
             </Box>
