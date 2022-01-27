@@ -1,18 +1,52 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_ANONKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzI4NTMzMywiZXhwIjoxOTU4ODYxMzMzfQ.-NtLxOG1vkn06eLyN25EPZnymDnJ0_x6ZSFPdh9X4R4';
+const SUBASE_URL = 'https://rqlwuzbgspxsernirxej.supabase.co';
+
+const supabseClient = createClient(SUBASE_URL,SUPABASE_ANONKEY );
+
+
 
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
+        React.useEffect(() => {
+            supabseClient
+            .from ('mensagens')
+            .select('*')
+            .order('id', {ascending: false})
+            .then(({data}) => {
+                console.log('teste consulta', data);
+                setListaDeMensagens(data)
+            }) ;
+
+        }, []);
+
+
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length,
-            remetente: 'brunowilian',
+            // id: listaDeMensagens.length,
+            de: 'brunowilian',
             texto: novaMensagem,
-        }
-        setListaDeMensagens([mensagem, ...listaDeMensagens]);
+        };
+
+        supabseClient
+            .from('mensagens')
+            .insert([
+                mensagem
+            ])
+            .then(({data}) => {
+                console.log('mensagem', data)
+                    setListaDeMensagens([
+                    data[0],
+                   ...listaDeMensagens,
+                   ]);
+            });
+
         setMensagem('');
     }
 
@@ -180,10 +214,11 @@ function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/${mensagem.remetente}.png`}
+                                //src={`https://github.com/brunowilian.png`}
+                               src={`https://github.com/${mensagem.de}.png`}
                             />
                             <Text tag="strong">
-                                {mensagem.remetente}
+                                {mensagem.de}
                             </Text>
                             <Text
                                 styleSheet={{
