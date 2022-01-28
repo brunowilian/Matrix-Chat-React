@@ -209,6 +209,7 @@ function MessageList(props) {
         <Box
             tag="ul"
             styleSheet={{
+                
                 overflow: 'auto',
                 display: 'flex',
                 flexDirection: 'column-reverse',
@@ -223,24 +224,27 @@ function MessageList(props) {
                         key={mensagem.id}
                         tag="li"
                         styleSheet={{
-                            borderRadius: '5px',
+                            marginLeft: "5px",
+                           borderRadius: '5px',
                             padding: '6px',
                             marginBottom: '12px',
-                            hover: {
-                                backgroundColor: appConfig.theme.colors.neutrals[700],
-                            }
+                            // background das mensagens
+                           // hover: {
+                               // backgroundColor: appConfig.theme.colors.neutrals[500],
+                            //}
                         }}
                     >
                         <Box
                             styleSheet={{
+                                
                                 display: 'flex',
                                 marginBottom: '8px',
                             }}
                         >
                             <Image
                                 styleSheet={{
-                                    width: '20px',
-                                    height: '20px',
+                                    width: '35px',
+                                    height: '35px',
                                     borderRadius: '50%',
                                     display: 'inline-block',
                                     marginRight: '8px',
@@ -248,12 +252,18 @@ function MessageList(props) {
                                 //src={`https://github.com/brunowilian.png`}
                                src={`https://github.com/${mensagem.de}.png`}
                             />
-                            <Text tag="strong">
+                            <Text tag="strong"
+                                styleSheet={{
+                                    marginLeft: "5px",
+                                    fontSize: '20px'
+                                }}
+                                >
                                 {mensagem.de}
                             </Text>
                             <Text
                                 styleSheet={{
-                                    fontSize: '10px',
+                                    
+                                   fontSize: '10px',
                                     marginLeft: '8px',
                                     color: appConfig.theme.colors.neutrals[300],
                                 }}
@@ -263,12 +273,13 @@ function MessageList(props) {
                             </Text>
                                 <Button 
                                     label='Excluir'
-                                    type='button'
+                                  //  type='button'
                                     onClick={(e) => {
                                         e.preventDefault();
                                         Remover(mensagem);
                                     }}
                                     styleSheet={{
+                                        
                                         height: '15px',
                                         width: '48px',
                                         marginLeft: '15px',
@@ -277,15 +288,22 @@ function MessageList(props) {
                                             backgroundColor: appConfig.theme.colors.neutrals[999],
                                         }
                                     }}
-                                />
+                                /> 
                         </Box>
                         {mensagem.texto.startsWith(':sticker:')
               ? (
-                <Image src={mensagem.texto.replace(':sticker:', '')} />
+                <Image src={mensagem.texto.replace(':sticker:', '')}
+                
+                styleSheet={{
+                    marginLeft: "50px",
+                   // height: '30%',
+                    
+                }} />
               )
-              : (
-                mensagem.texto
-              )}                
+              : 
+              (
+                      mensagem.texto   
+              )}               
                   </Text>
                 )
             })}
