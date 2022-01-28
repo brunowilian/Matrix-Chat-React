@@ -198,12 +198,13 @@ function Header() {
 }
 
 function MessageList(props) {
-    function Remover(mensagem) {
+
+   /* function Remover(mensagem) {
         const novaListaDeMensagens = props.mensagens.filter((mensagemRemover) =>{
             return mensagem.id !== mensagemRemover.id
         })
         props.setMensagens(novaListaDeMensagens)
-    }
+    }*/
 
     return (
         <Box
@@ -224,7 +225,7 @@ function MessageList(props) {
                         key={mensagem.id}
                         tag="li"
                         styleSheet={{
-                            marginLeft: "5px",
+                            
                            borderRadius: '5px',
                             padding: '6px',
                             marginBottom: '12px',
@@ -254,7 +255,7 @@ function MessageList(props) {
                             />
                             <Text tag="strong"
                                 styleSheet={{
-                                    marginLeft: "5px",
+                                    
                                     fontSize: '20px'
                                 }}
                                 >
@@ -271,24 +272,7 @@ function MessageList(props) {
                             >
                                 {(new Date().toLocaleDateString())}
                             </Text>
-                                <Button 
-                                    label='Excluir'
-                                  //  type='button'
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        Remover(mensagem);
-                                    }}
-                                    styleSheet={{
-                                        
-                                        height: '15px',
-                                        width: '48px',
-                                        marginLeft: '15px',
-                                        
-                                        hover: {
-                                            backgroundColor: appConfig.theme.colors.neutrals[999],
-                                        }
-                                    }}
-                                /> 
+                            
                         </Box>
                         {mensagem.texto.startsWith(':sticker:')
               ? (
