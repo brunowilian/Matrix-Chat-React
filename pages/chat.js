@@ -199,7 +199,7 @@ function Header() {
 
 function MessageList(props) {
 
-   /* function Remover(mensagem) {
+    /* function Remover(mensagem) {
         const novaListaDeMensagens = props.mensagens.filter((mensagemRemover) =>{
             return mensagem.id !== mensagemRemover.id
         })
